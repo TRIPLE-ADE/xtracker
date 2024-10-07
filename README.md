@@ -1,36 +1,176 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# XTracker
+
+**XTracker** is a web-based application for tracking and managing user expenses. It aims to provide financial insights and tools to help users better manage their finances. Built using **Next.js** and designed to be scalable and easy to maintain, XTracker follows industry-standard practices.
+
+## Table of Contents
+
+1. [Getting Started](#getting-started)
+   - [Prerequisites](#prerequisites)
+   - [Setup](#setup)
+2. [Project Structure](#project-structure)
+3. [Features](#features)
+4. [Contributing](#-contributing)
+   - [Contribution Guidelines](#contribution-guidelines)
+   - [Commit Cheat Sheet](#commit-cheat-sheet)
+5. [Tech Stack](#tech-stack)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Ensure you have the following installed on your machine:
+
+- [Node.js 18.19+](https://nodejs.org/)
+- [NPM](https://www.npmjs.com/) (or [Yarn](https://yarnpkg.com/) / [PNPM](https://pnpm.io/))
+- [Supabase Account](https://supabase.com/)
+- [Git](https://git-scm.com/)
+
+### Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/xtracker.git
+   ```
+
+2. **Navigate into the project directory:**
+   ```bash
+   cd xtracker
+   ```
+
+3. **Install project dependencies:**
+   ```bash
+   npm install
+   ```
+
+4. **Set up environment variables:**
+
+   Create a `.env.local` file at the root of your project and add the following:
+
+   ```bash
+   NEXTAUTH_SECRET=your_nextauth_secret
+   NEXTAUTH_URL=http://localhost:3000
+   SUPABASE_URL=your_supabase_url
+   SUPABASE_KEY=your_supabase_key
+   ```
+
+5. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser to view the result:**
+   - [http://localhost:3000](http://localhost:3000)
+
+## Project Structure
+
+The project follows a **feature-first** folder structure:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+xtracker/
+│
+├── app/                # App directory for routing and pages
+│   ├── api/            # API routes
+│   ├── components/      # Reusable components
+│   ├── layout.tsx       # Layout component
+│   ├── page.tsx         # Main entry point for the app
+│   ├── styles/          # Global styles (including Tailwind)
+│   ├── middleware.ts    # Middleware for authentication
+│   ├── hooks/           # Custom React hooks
+│   └── utils/           # Utility functions
+│
+├── public/              # Static files (e.g., images, favicons)
+├── .husky/              # Husky configuration for pre-commit hooks
+├── .eslintrc.js         # ESLint configuration
+├── .prettierrc          # Prettier configuration
+├── .commitlintrc.js     # Commitlint configuration
+├── next-env.d.ts        # TypeScript environment definitions
+└── next.config.js       # Next.js configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **User Authentication**: Powered by NextAuth.js with Supabase as the database backend.
+- **Expense Categorization**: Track expenses by categories like food, travel, etc.
+- **Financial Insights**: Visualize spending trends using charts.
+- **Budget Alerts**: Set budgets and receive notifications when close to limits.
+- **Export Reports**: Generate reports of your spending.
+- **Smart Budgeting**: AI-driven insights to help with budgeting decisions.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🤝 Contributing
 
-## Learn More
+Contributions, issues, and feature requests are welcome! Please follow the steps below to contribute:
 
-To learn more about Next.js, take a look at the following resources:
+### Contribution Guidelines
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/xtracker.git
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Create a new branch from `main`:**
+   ```bash
+   git checkout -b Feat/{feature-name} origin/main
+   ```
 
-## Deploy on Vercel
+3. **Ensure your branch is up to date:**
+   ```bash
+   git pull origin main
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Make your changes and run tests:**
+   ```bash
+   npm run test
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. **Commit your changes with a descriptive message:**
+   ```bash
+   git commit -m "feat: {describe your feature here}"
+   ```
+
+6. **Push your changes:**
+   ```bash
+   git push -u origin Feat/{feature-name}
+   ```
+
+7. **Create a pull request and describe your changes in detail.**
+
+### _Commit Cheat Sheet_
+
+| Type     | Description                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| feat     | A new feature you're adding                                                                                 |
+| fix      | A bug fix                                                                                                   |
+| docs     | Documentation only changes                                                                                  |
+| style    | Changes that do not affect code logic (e.g., formatting, linting)                                            |
+| refactor | Code change that neither fixes a bug nor adds a feature                                                     |
+| perf     | Code change that improves performance                                                                       |
+| test     | Adding or updating tests                                                                                     |
+| build    | Changes that affect the build system or external dependencies                                                |
+| ci       | Changes to CI configuration files and scripts                                                               |
+| chore    | Other changes that don't modify source or test files                                                        |
+| revert   | Reverts a previous commit                                                                                   |
+
+#### Sample Commit Message
+- `feat: Add new expense categorization feature` := Adding a new feature to categorize expenses.
+
+## Tech Stack
+
+- **Frontend**: [Next.js](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
+- **Backend**: [Supabase](https://supabase.com/)
+- **Linting**: [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/)
+- **Git Hooks**: [Husky](https://typicode.github.io/husky/#/)
+- **Commit Guidelines**: [Commitlint](https://commitlint.js.org/)
+
+## Additional Setup
+
+- **Husky**: Pre-commit hooks to ensure code quality.
+   ```bash
+   npx husky install
+   ```
+
+- **Prettier + ESLint**: Ensure consistent code formatting and quality.
+   ```bash
+   npm run lint
+   ```
