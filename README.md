@@ -28,16 +28,19 @@ Ensure you have the following installed on your machine:
 ### Setup
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/yourusername/xtracker.git
    ```
 
 2. **Navigate into the project directory:**
+
    ```bash
    cd xtracker
    ```
 
 3. **Install project dependencies:**
+
    ```bash
    npm install
    ```
@@ -54,6 +57,7 @@ Ensure you have the following installed on your machine:
    ```
 
 5. **Run the development server:**
+
    ```bash
    npm run dev
    ```
@@ -68,6 +72,7 @@ The project follows a **feature-first** folder structure:
 ```bash
 xtracker/
 │
+├── .husky/              # Husky configuration for pre-commit hooks
 ├── app/                # App directory for routing and pages
 │   ├── api/            # API routes
 │   ├── components/      # Reusable components
@@ -77,14 +82,19 @@ xtracker/
 │   ├── middleware.ts    # Middleware for authentication
 │   ├── hooks/           # Custom React hooks
 │   └── utils/           # Utility functions
-│
-├── public/              # Static files (e.g., images, favicons)
-├── .husky/              # Husky configuration for pre-commit hooks
-├── .eslintrc.js         # ESLint configuration
-├── .prettierrc          # Prettier configuration
-├── .commitlintrc.js     # Commitlint configuration
+├── .eslintignore         # ESLint ignore rules configuration
+├── .eslintrc.json        # ESLint configuration
+├── .prettierignore       # Prettier ignore rules configuration
+├── .prettierrc.json      # Prettier configuration
+├── commitlint.config.mjs # Commitlint configuration
 ├── next-env.d.ts        # TypeScript environment definitions
-└── next.config.js       # Next.js configuration
+├── next.config.mjs       # Next.js configuration
+├── package-lock.json       # Lockfile for npm dependencies
+├── package.json            # Project metadata and npm scripts
+├── postcss.config.mjs     # Tailwind Postcss configuration
+├── README.md            # Project documentation
+├── tailwind.config.ts    # Tailwind configuration
+└── tsconfig.json       # TypeScript  configuration
 ```
 
 ## Features
@@ -103,31 +113,37 @@ Contributions, issues, and feature requests are welcome! Please follow the steps
 ### Contribution Guidelines
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/yourusername/xtracker.git
    ```
 
 2. **Create a new branch from `main`:**
+
    ```bash
    git checkout -b Feat/{feature-name} origin/main
    ```
 
 3. **Ensure your branch is up to date:**
+
    ```bash
    git pull origin main
    ```
 
 4. **Make your changes and run tests:**
+
    ```bash
    npm run test
    ```
 
 5. **Commit your changes with a descriptive message:**
+
    ```bash
    git commit -m "feat: {describe your feature here}"
    ```
 
 6. **Push your changes:**
+
    ```bash
    git push -u origin Feat/{feature-name}
    ```
@@ -136,21 +152,22 @@ Contributions, issues, and feature requests are welcome! Please follow the steps
 
 ### _Commit Cheat Sheet_
 
-| Type     | Description                                                                                                 |
-| -------- | ----------------------------------------------------------------------------------------------------------- |
-| feat     | A new feature you're adding                                                                                 |
-| fix      | A bug fix                                                                                                   |
-| docs     | Documentation only changes                                                                                  |
-| style    | Changes that do not affect code logic (e.g., formatting, linting)                                            |
-| refactor | Code change that neither fixes a bug nor adds a feature                                                     |
-| perf     | Code change that improves performance                                                                       |
-| test     | Adding or updating tests                                                                                     |
-| build    | Changes that affect the build system or external dependencies                                                |
-| ci       | Changes to CI configuration files and scripts                                                               |
-| chore    | Other changes that don't modify source or test files                                                        |
-| revert   | Reverts a previous commit                                                                                   |
+| Type     | Description                                                       |
+| -------- | ----------------------------------------------------------------- |
+| feat     | A new feature you're adding                                       |
+| fix      | A bug fix                                                         |
+| docs     | Documentation only changes                                        |
+| style    | Changes that do not affect code logic (e.g., formatting, linting) |
+| refactor | Code change that neither fixes a bug nor adds a feature           |
+| perf     | Code change that improves performance                             |
+| test     | Adding or updating tests                                          |
+| build    | Changes that affect the build system or external dependencies     |
+| ci       | Changes to CI configuration files and scripts                     |
+| chore    | Other changes that don't modify source or test files              |
+| revert   | Reverts a previous commit                                         |
 
 #### Sample Commit Message
+
 - `feat: Add new expense categorization feature` := Adding a new feature to categorize expenses.
 
 ## Tech Stack
@@ -166,11 +183,12 @@ Contributions, issues, and feature requests are welcome! Please follow the steps
 ## Additional Setup
 
 - **Husky**: Pre-commit hooks to ensure code quality.
-   ```bash
-   npx husky install
-   ```
+
+  ```bash
+  npx husky install
+  ```
 
 - **Prettier + ESLint**: Ensure consistent code formatting and quality.
-   ```bash
-   npm run lint
-   ```
+  ```bash
+  npm run lint
+  ```

@@ -1,6 +1,9 @@
+import { type } from "os";
+
 export default {
   extends: ["@commitlint/config-conventional"],
   rules: {
-    "subject-case": [2, "never", ["sentence-case"]]
+    "type-case": [2, "always", "lower-case"],
+    "subject-case": [2, "always", "sentence-case"],
   },
 };
