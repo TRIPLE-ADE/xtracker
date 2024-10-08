@@ -39,9 +39,10 @@
     "jsx-a11y/interactive-supports-focus": "warn",
     "prettier/prettier": "warn",
     "no-unused-vars": "off",
+    "@typescript-eslint/no-require-imports": "off",
     "unused-imports/no-unused-vars": "off",
     "unused-imports/no-unused-imports": "warn",
-    "object-curly-spacing": ["error", "never"],
+    "object-curly-spacing": ["error", "always"],
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {

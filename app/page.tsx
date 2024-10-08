@@ -1,101 +1,123 @@
-import Image from "next/image";
+import React from "react";
+import { ArrowRight, PiggyBank, TrendingUp, Shield, Target, Zap, Smartphone } from "lucide-react";
 
-export default function Home() {
+import { Button } from "@/components/ui/button";
+import Navbar from "@/components/Navbar";
+
+const Home = () => {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          priority
-          alt="Next.js logo"
-          className="dark:invert"
-          height={38}
-          src="https://nextjs.org/icons/next.svg"
-          width={180}
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-gradient-to-br from-slate-200 via-slate-50 to-gray-200 text-gray-800">
+      <header>
+        <Navbar />
+      </header>
+      <main>
+        <section
+          className="text-center mb-16 min-h-screen flex flex-col justify-center items-center bg-cover bg-center relative"
+          style={{ backgroundImage: `url('/assets/images/hero.webp')` }}
+        >
+          {/* <h1 className="text-5xl font-bold mb-4 text-indigo-600 font-mono">Xtracker</h1>
+          <p className="text-xl mb-8 text-gray-600">Your AI-Powered Personal Finance Assistant</p>
+          <Button
+            className="bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300"
+            size="lg"
+          >
+            Get Started <ArrowRight aria-hidden className="ml-2" />
+          </Button>
+        </section> */}
+          <div className="absolute inset-0 bg-black opacity-60" />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            rel="noopener noreferrer"
-            target="_blank"
+          <div className="relative z-10 p-8">
+            {/* <h1 className="text-5xl font-bold mb-4 text-white font-mono drop-shadow-lg">
+              Xtracker
+            </h1>
+            <p className="text-xl mb-8 text-white drop-shadow-lg">
+              Your AI-Powered Personal Finance Assistant
+            </p> */}
+            <h1 className="text-5xl font-bold mb-4 text-indigo-600 font-mono">Xtracker</h1>
+            <p className="text-xl mb-8 text-white drop-shadow-lg">
+              Your AI-Powered Personal Finance Assistant
+            </p>
+            <Button
+              className="bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300"
+              size="lg"
+            >
+              Get Started <ArrowRight aria-hidden className="ml-2" />
+            </Button>
+          </div>
+        </section>
+
+        <section
+          className="container mx-auto grid md:grid-cols-3 gap-8 mb-16 scroll-m-10"
+          id="features"
+        >
+          <FeatureCard
+            description="AI-driven insights to help you save more and spend wisely."
+            icon={<PiggyBank aria-hidden className="w-12 h-12 mb-4 text-indigo-500" />}
+            title="Smart Budgeting"
+          />
+          <FeatureCard
+            description="Easily categorize and visualize your spending habits."
+            icon={<TrendingUp aria-hidden className="w-12 h-12 mb-4 text-indigo-500" />}
+            title="Expense Tracking"
+          />
+          <FeatureCard
+            description="Bank-level encryption to keep your data safe and secure."
+            icon={<Shield aria-hidden className="w-12 h-12 mb-4 text-indigo-500" />}
+            title="Financial Security"
+          />
+          <FeatureCard
+            description="Set and track financial goals with personalized milestones."
+            icon={<Target aria-hidden className="w-12 h-12 mb-4 text-indigo-500" />}
+            title="Goal Setting"
+          />
+          <FeatureCard
+            description="Never miss a payment with smart bill tracking and reminders."
+            icon={<Zap aria-hidden className="w-12 h-12 mb-4 text-indigo-500" />}
+            title="Bill Reminders"
+          />
+          <FeatureCard
+            description="Access your finances on-the-go with our user-friendly mobile app."
+            icon={<Smartphone aria-hidden className="w-12 h-12 mb-4 text-indigo-500" />}
+            title="Mobile App"
+          />
+        </section>
+
+        <section className="text-center mb-16 container mx-auto" id="about">
+          <h2 className="text-3xl font-bold mb-4 text-indigo-600">
+            Take Control of Your Finances Today
+          </h2>
+          <p className="text-xl mb-8 text-gray-600">
+            Join thousands of users who have transformed their financial lives with Xtracker.
+          </p>
+          <Button
+            className="bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300"
+            size="lg"
           >
-            <Image
-              alt="Vercel logomark"
-              className="dark:invert"
-              height={20}
-              src="https://nextjs.org/icons/vercel.svg"
-              width={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Read our docs
-          </a>
-        </div>
+            Start Your Financial Journey <ArrowRight className="ml-2" />
+          </Button>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Image
-            aria-hidden
-            alt="File icon"
-            height={16}
-            src="https://nextjs.org/icons/file.svg"
-            width={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Image
-            aria-hidden
-            alt="Window icon"
-            height={16}
-            src="https://nextjs.org/icons/window.svg"
-            width={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Image
-            aria-hidden
-            alt="Globe icon"
-            height={16}
-            src="https://nextjs.org/icons/globe.svg"
-            width={16}
-          />
-          Go to nextjs.org →
-        </a>
+      <footer className="text-center text-sm text-gray-600 font-mono py-16 container mx-auto">
+        © 2024 Xtracker. All rights reserved.
       </footer>
     </div>
   );
+};
+
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
 }
+
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => {
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md text-center">
+      {icon}
+      <h3 className="text-xl font-semibold mb-2 text-indigo-600">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+    </div>
+  );
+};
+
+export default Home;
