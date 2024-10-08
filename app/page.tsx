@@ -6,13 +6,16 @@ import Navbar from "@/components/Navbar";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 text-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-slate-200 via-slate-50 to-gray-200 text-gray-800">
       <header>
         <Navbar />
       </header>
-      <main className="container mx-auto px-4 py-16">
-        <section className="text-center mb-16 min-h-screen">
-          <h1 className="text-5xl font-bold mb-4 text-indigo-600 font-mono">Xtracker</h1>
+      <main>
+        <section
+          className="text-center mb-16 min-h-screen flex flex-col justify-center items-center bg-cover bg-center relative"
+          style={{ backgroundImage: `url('/assets/images/hero.webp')` }}
+        >
+          {/* <h1 className="text-5xl font-bold mb-4 text-indigo-600 font-mono">Xtracker</h1>
           <p className="text-xl mb-8 text-gray-600">Your AI-Powered Personal Finance Assistant</p>
           <Button
             className="bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300"
@@ -20,9 +23,33 @@ const Home = () => {
           >
             Get Started <ArrowRight aria-hidden className="ml-2" />
           </Button>
+        </section> */}
+          <div className="absolute inset-0 bg-black opacity-60" />
+
+          <div className="relative z-10 p-8">
+            {/* <h1 className="text-5xl font-bold mb-4 text-white font-mono drop-shadow-lg">
+              Xtracker
+            </h1>
+            <p className="text-xl mb-8 text-white drop-shadow-lg">
+              Your AI-Powered Personal Finance Assistant
+            </p> */}
+            <h1 className="text-5xl font-bold mb-4 text-indigo-600 font-mono">Xtracker</h1>
+            <p className="text-xl mb-8 text-white drop-shadow-lg">
+              Your AI-Powered Personal Finance Assistant
+            </p>
+            <Button
+              className="bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300"
+              size="lg"
+            >
+              Get Started <ArrowRight aria-hidden className="ml-2" />
+            </Button>
+          </div>
         </section>
 
-        <section className="grid md:grid-cols-3 gap-8 mb-16 scroll-m-10" id="features">
+        <section
+          className="container mx-auto grid md:grid-cols-3 gap-8 mb-16 scroll-m-10"
+          id="features"
+        >
           <FeatureCard
             description="AI-driven insights to help you save more and spend wisely."
             icon={<PiggyBank aria-hidden className="w-12 h-12 mb-4 text-indigo-500" />}
@@ -55,7 +82,7 @@ const Home = () => {
           />
         </section>
 
-        <section className="text-center mb-16" id="about">
+        <section className="text-center mb-16 container mx-auto" id="about">
           <h2 className="text-3xl font-bold mb-4 text-indigo-600">
             Take Control of Your Finances Today
           </h2>
@@ -70,7 +97,7 @@ const Home = () => {
           </Button>
         </section>
       </main>
-      <footer className="text-center text-sm text-gray-600 font-mono py-16">
+      <footer className="text-center text-sm text-gray-600 font-mono py-16 container mx-auto">
         © 2024 Xtracker. All rights reserved.
       </footer>
     </div>
