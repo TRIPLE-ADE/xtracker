@@ -115,7 +115,7 @@ Contributions, issues, and feature requests are welcome! Please follow the steps
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/xtracker.git
+   git clone https://github.com/TRIPLE-ADE/xtracker.git
    ```
 
 2. **Create a new branch from `main`:**
