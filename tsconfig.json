@@ -20,10 +20,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@shared/*": ["components/*"],
+      "@shared/*": ["shared/*"],
       "@features/*": ["features/*"],
       "@layout/*": ["layout/*"],
-      "@ui/*": ["components/ui/*"],
+      "@ui/*": ["shared/ui/*"],
       "@hooks/*": ["hooks/*"]
     }
   },
