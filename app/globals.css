@@ -1,24 +1,19 @@
-/* Tailwind base, components, and utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scroll behavior for the entire HTML document */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom utility classes */
 @layer utilities {
   .text-balance {
-    text-wrap: balance; /* Balance text wrapping */
+    text-wrap: balance;
   }
 }
 
-/* Base styles and CSS variables */
 @layer base {
   :root {
-    /* Light mode color variables */
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -43,10 +38,9 @@ html {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem; /* Default border radius */
+    --radius: 0.5rem;
   }
 
-  /* Dark mode color variables */
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -74,12 +68,11 @@ html {
     --chart-5: 340 75% 55%;
   }
 
-  /* Global styles */
   * {
-    @apply border-border; /* Apply border color to all elements */
+    @apply border-border;
   }
-
+  
   body {
-    @apply bg-background text-foreground; /* Set background and text color */
+    @apply bg-background text-foreground;
   }
 }

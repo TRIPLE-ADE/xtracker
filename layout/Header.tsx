@@ -25,17 +25,17 @@ const Navbar = () => {
               <li>
                 <a
                   className="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium"
-                  href="#features"
+                  href="#about"
                 >
-                  Features
+                  About
                 </a>
               </li>
               <li>
                 <a
                   className="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium"
-                  href="#about"
+                  href="#features"
                 >
-                  About
+                  Features
                 </a>
               </li>
               <li>
@@ -77,17 +77,17 @@ const Navbar = () => {
             <li>
               <a
                 className="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium"
-                href="#features"
+                href="#about"
               >
-                Features
+                About
               </a>
             </li>
             <li>
               <a
                 className="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium"
-                href="#about"
+                href="#features"
               >
-                About
+                Features
               </a>
             </li>
             <li>
