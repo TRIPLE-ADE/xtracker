@@ -41,7 +41,7 @@ const Navbar = () => {
               <li>
                 <Link
                   className="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium"
-                  href="/signin"
+                  href="/auth/login"
                 >
                   Sign In
                 </Link>
@@ -49,7 +49,7 @@ const Navbar = () => {
               <li>
                 <Link
                   className="px-3 py-2 rounded-md text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700"
-                  href="/signup"
+                  href="/auth/signup"
                 >
                   Sign Up
                 </Link>
@@ -93,7 +93,7 @@ const Navbar = () => {
             <li>
               <Link
                 className="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium"
-                href="/signin"
+                href="/auth/login"
               >
                 Sign In
               </Link>
@@ -101,7 +101,7 @@ const Navbar = () => {
             <li>
               <Link
                 className="w-full bg-indigo-600 text-white hover:bg-indigo-700 mt-2 block px-3 py-2 rounded-md text-base font-medium"
-                href="/signup"
+                href="/auth/signup"
               >
                 Sign Up
               </Link>
