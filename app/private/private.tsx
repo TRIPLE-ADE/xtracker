@@ -1,15 +1,16 @@
 import { User as SupabaseUser } from "@supabase/auth-js";
 
+import SubmitButton from "@/shared/submitButton";
+
 export default function PrivatePage({ user }: { user: SupabaseUser }) {
   return (
     <div>
+      <pre>{JSON.stringify(user, null, 2)}</pre>
       <h1>Private Page</h1>
       <p>Hello {user.email}</p>
 
       <form action="/auth/signout" method="post">
-        <button className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg" type="submit">
-          Logout
-        </button>
+        <SubmitButton className="w-fit" text="Sign Out" />
       </form>
     </div>
   );

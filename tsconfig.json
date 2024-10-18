@@ -25,7 +25,9 @@
       "@layout/*": ["layout/*"],
       "@ui/*": ["shared/ui/*"],
       "@hooks/*": ["hooks/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@types/*": ["types/*"],
+      "@schemas/*": ["schemas/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

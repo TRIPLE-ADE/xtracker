@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { login } from "@/app/auth/actions";
+import SubmitButton from "@/shared/submitButton";
 
 export default function LoginPage() {
   return (
@@ -10,7 +11,7 @@ export default function LoginPage() {
           Welcome to XTracker
         </h2>
 
-        <form className="space-y-6">
+        <form action={login} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700" htmlFor="email">
               Email:
@@ -37,14 +38,7 @@ export default function LoginPage() {
             />
           </div>
 
-          <div className="flex justify-between">
-            <button
-              className="w-full bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition ease-in-out duration-200"
-              formAction={login}
-            >
-              Log in
-            </button>
-          </div>
+          <SubmitButton text="Log in" />
 
           <div className="text-center text-gray-500 mt-4">
             <span>Don&apos;t have an account? </span>

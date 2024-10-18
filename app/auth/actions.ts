@@ -4,16 +4,27 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
+import { signUpSchema, loginSchema } from "@/schemas/authSchema";
 
 export async function login(formData: FormData) {
   const supabase = createClient();
 
   // type-casting here for convenience
   // in practice, you should validate your inputs
-  const data = {
+
+  const parseResult = loginSchema.safeParse({
     email: formData.get("email") as string,
     password: formData.get("password") as string,
-  };
+  });
+
+  if (!parseResult.success) {
+    console.log(parseResult.error);
+    redirect("/error");
+
+    return;
+  }
+
+  const data = parseResult.data;
 
   const { data: success, error } = await supabase.auth.signInWithPassword(data);
 
@@ -34,13 +45,27 @@ export async function signup(formData: FormData) {
 
   // type-casting here for convenience
   // in practice, you should validate your inputs
-  const data = {
+  const parseResult = signUpSchema.safeParse({
     email: formData.get("email") as string,
     password: formData.get("password") as string,
-    name: formData.get("name") as string,
-  };
+    confirmPassword: formData.get("confirmPassword") as string,
+  });
 
-  const { error } = await supabase.auth.signUp(data);
+  if (!parseResult.success) {
+    console.log(parseResult.error.flatten().fieldErrors);
+
+    // return {
+    //   message: parseResult.error.flatten().fieldErrors, // Flatten error details
+    // };
+    return;
+  }
+
+  const data = parseResult.data;
+
+  const { error } = await supabase.auth.signUp({
+    email: data.email,
+    password: data.password,
+  });
 
   if (error) {
     console.log(error);
@@ -48,7 +73,7 @@ export async function signup(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/private");
+  redirect("/login");
 }
 
 // export async function signOut() {

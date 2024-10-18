@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { signup } from "@/app/auth/actions";
+import SubmitButton from "@/shared/submitButton";
 
 export default function SignupPage() {
   return (
@@ -10,20 +11,7 @@ export default function SignupPage() {
           Create Your Account
         </h2>
 
-        <form className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700" htmlFor="name">
-              Full Name:
-            </label>
-            <input
-              required
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-              id="name"
-              name="name"
-              type="text"
-            />
-          </div>
-
+        <form action={signup} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700" htmlFor="email">
               Email:
@@ -50,14 +38,20 @@ export default function SignupPage() {
             />
           </div>
 
-          <div className="flex justify-between">
-            <button
-              className="w-full bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition ease-in-out duration-200"
-              formAction={signup}
-            >
-              Sign up
-            </button>
+          <div>
+            <label className="block text-sm font-medium text-gray-700" htmlFor="password">
+              Confirm Password:
+            </label>
+            <input
+              required
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+            />
           </div>
+
+          <SubmitButton text="Sign Up" />
 
           <div className="text-center text-gray-500 mt-4">
             <span> Already have an account?</span>
