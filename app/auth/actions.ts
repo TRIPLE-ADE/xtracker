@@ -51,7 +51,7 @@ export async function login(prevState: PrevState, formData: FormData) {
   } catch (error) {
     return {
       success: false,
-      message: "An unexpected error occurred. Please try again later.",
+      message: `${error} An unexpected error occurred. Please try again later.`,
     };
   }
 }
@@ -96,7 +96,7 @@ export async function signup(prevState: PrevState, formData: FormData) {
   } catch (error) {
     return {
       success: false,
-      message: "An unexpected error occurred. Please try again later.",
+      message: `${error} An unexpected error occurred. Please try again later.`,
     };
   }
 }
