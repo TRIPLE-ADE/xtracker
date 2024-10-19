@@ -34,5 +34,5 @@ export const loginSchema = z.object({
     .min(1, "Email cannot be empty")
     .max(255, "Email must be at most 255 characters")
     .email("Please provide a valid email address"),
-  password: z.string().min(8),
+  password: z.string().min(8, "Password must be at least 8 characters long"),
 });

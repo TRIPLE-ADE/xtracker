@@ -6,11 +6,15 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { signUpSchema, loginSchema } from "@/schemas/authSchema";
 
-export async function login(formData: FormData) {
-  const supabase = createClient();
+type PrevState =
+  | {
+      message: Partial<Record<"email" | "password" | "confirmPassword", string[]>>;
+      success?: boolean;
+    }
+  | { message: string; success?: boolean };
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
+export async function login(prevState: PrevState, formData: FormData) {
+  const supabase = createClient();
 
   const parseResult = loginSchema.safeParse({
     email: formData.get("email") as string,
@@ -18,33 +22,36 @@ export async function login(formData: FormData) {
   });
 
   if (!parseResult.success) {
-    console.log(parseResult.error);
-    redirect("/error");
-
-    return;
+    return {
+      ...prevState,
+      message: parseResult.error.flatten().fieldErrors, // Flatten error details
+    };
   }
 
   const data = parseResult.data;
 
-  const { data: success, error } = await supabase.auth.signInWithPassword(data);
+  const { error } = await supabase.auth.signInWithPassword(data);
 
-  if (success) {
-    console.log("User logged in:", success);
-  }
   if (error) {
     console.log(error);
-    redirect("/error");
+
+    return {
+      success: false,
+      message: "Login failed. Please check your credentials and try again.",
+    };
   }
 
   revalidatePath("/", "layout");
-  redirect("/private");
+
+  return {
+    success: true,
+    message: "Login successful. Welcome back!",
+  };
 }
 
-export async function signup(formData: FormData) {
+export async function signup(prevState: PrevState, formData: FormData) {
   const supabase = createClient();
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
   const parseResult = signUpSchema.safeParse({
     email: formData.get("email") as string,
     password: formData.get("password") as string,
@@ -52,24 +59,35 @@ export async function signup(formData: FormData) {
   });
 
   if (!parseResult.success) {
-    console.log(parseResult.error.flatten().fieldErrors);
-
-    // return {
-    //   message: parseResult.error.flatten().fieldErrors, // Flatten error details
-    // };
-    return;
+    return {
+      ...prevState,
+      message: parseResult.error.flatten().fieldErrors, // Flatten error details
+    };
   }
 
   const data = parseResult.data;
 
-  const { error } = await supabase.auth.signUp({
+  const { data: success, error } = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
   });
 
   if (error) {
     console.log(error);
-    redirect("/error");
+
+    return {
+      success: false,
+      message: "Signup failed. Please try again later.",
+    };
+  }
+
+  if (success) {
+    console.log("User signed up:", success);
+
+    return {
+      success: true,
+      message: "Signup successful. Please check your email to verify your account.",
+    };
   }
 
   revalidatePath("/", "layout");
