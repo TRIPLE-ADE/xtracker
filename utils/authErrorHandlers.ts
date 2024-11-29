@@ -1,8 +1,6 @@
 import { AuthError } from "@supabase/auth-js";
 
 export const handleError = (error: AuthError, defaultMessage: string) => {
-  console.log(error);
-
   if (error.status === 0) {
     return {
       success: false,

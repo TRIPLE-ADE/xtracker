@@ -35,17 +35,40 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (
-    !user &&
+  const redirectRules =
     !request.nextUrl.pathname.startsWith("/auth") &&
-    !request.nextUrl.pathname.startsWith("/")
-  ) {
+    request.nextUrl.pathname !== "/" &&
+    request.nextUrl.pathname !== "";
+
+  if (!user && redirectRules) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
 
     url.pathname = "/auth/login";
 
     return NextResponse.redirect(url);
+  }
+
+  if (user && redirectRules && !request.nextUrl.pathname.startsWith("/onboarding")) {
+    const { data: profileData, error: profileError } = await supabase
+      .from("onboarding")
+      .select("onboarding_status")
+      .eq("user_id", user.id)
+      .single();
+
+    const url = request.nextUrl.clone();
+
+    if (profileError) {
+      url.pathname = "/auth/login";
+
+      return NextResponse.redirect(url);
+    }
+
+    if (profileData?.onboarding_status !== "COMPLETED") {
+      url.pathname = "/onboarding";
+
+      return NextResponse.redirect(url);
+    }
   }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're

@@ -8,6 +8,7 @@ export default async function Page() {
   const supabase = createClient();
 
   const { data, error } = await supabase.auth.getUser();
+  const { data: allOnboardingData } = await supabase.from("onboarding").select("*");
 
   if (error || !data?.user) {
     redirect("/auth/login");
@@ -15,7 +16,8 @@ export default async function Page() {
 
   return (
     <div>
-      <PrivatePage user={data.user} />
+      <pre>{JSON.stringify(allOnboardingData, null, 2)}</pre>
+      <PrivatePage />
     </div>
   );
 }
