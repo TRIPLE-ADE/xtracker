@@ -127,6 +127,7 @@ const RecentTransactions: React.FC = () => {
 import React, { useState, useEffect } from "react";
 
 import { Button } from "@/shared/ui/button"; // Example of button import
+import SubmitButton from "@/shared/submitButton";
 
 const Dashboard: React.FC = () => {
   const [totalExpenses, setTotalExpenses] = useState<number>(0);
@@ -143,6 +144,9 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="p-6 space-y-6">
+      <form action="/auth/signout" method="post">
+        <SubmitButton className="w-fit" text="Sign Out" />
+      </form>
       <h1 className="text-3xl font-bold">Dashboard</h1>
       <BudgetOverview budget={budget} totalExpenses={totalExpenses} />
       <SavingsGoal goal={savingsGoal} totalExpenses={totalExpenses} />
