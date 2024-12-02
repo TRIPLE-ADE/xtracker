@@ -1,22 +1,14 @@
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8", "#82CA9D"];
+import useExpenseStore from "@/store/expenseStore";
 
-interface Expense {
-  id: string;
-  description: string;
-  amount: number;
-  category?: string;
-}
+const COLORS = ["#60A5FA", "#F472B6", "#A78BFA", "#818CF8", "#2DD4BF"];
 
-interface ExpenseChartProps {
-  expenses: Expense[];
-}
-
-const ExpenseChart: React.FC<ExpenseChartProps> = ({ expenses }) => {
+const ExpenseChart: React.FC = () => {
+  const { expenses, categories } = useExpenseStore();
   const categoryTotals = expenses.reduce((acc: { [key: string]: number }, expense) => {
-    const category = expense.category || "Uncategorized";
+    const category = expense.category_id || "Uncategorized";
 
     acc[category] = (acc[category] || 0) + expense.amount;
 
@@ -24,7 +16,7 @@ const ExpenseChart: React.FC<ExpenseChartProps> = ({ expenses }) => {
   }, {});
 
   const data = Object.entries(categoryTotals).map(([category, total]) => ({
-    name: category,
+    name: category ? categories.find((c) => c.id === category)?.name : category,
     value: total,
   }));
 
@@ -37,12 +29,16 @@ const ExpenseChart: React.FC<ExpenseChartProps> = ({ expenses }) => {
             cy="50%"
             data={data}
             dataKey="value"
-            fill="#8884d8"
-            labelLine={false}
-            outerRadius={80}
+            innerRadius={60}
+            outerRadius={90}
+            paddingAngle={5}
           >
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+                strokeLinecap="round"
+              />
             ))}
           </Pie>
           <Tooltip />

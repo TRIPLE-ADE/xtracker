@@ -1,19 +1,31 @@
 import React from "react";
-// import { Badge } from "@/shared/ui/badge";
 
-interface Expense {
-  id: string;
-  description: string;
-  amount: number;
-  category?: string;
-}
+import useExpenseStore from "@/store/expenseStore";
 
 interface ExpenseListProps {
-  expenses: Expense[];
   totalExpenses: number;
 }
 
-const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, totalExpenses }) => {
+const ExpenseList: React.FC<ExpenseListProps> = ({ totalExpenses }) => {
+  const { expenses } = useExpenseStore();
+
+  // const filteredExpenses = useMemo(() => {
+  //   return expenses.filter((expense) => {
+  //     const matchesCategory = filters.category_id
+  //       ? expense.category_id === filters.category_id
+  //       : true;
+  //     const matchesDateRange = filters.dateRange
+  //       ? new Date(expense.date) >= new Date(filters.dateRange.split(" - ")[0]) &&
+  //         new Date(expense.date) <= new Date(filters.dateRange.split(" - ")[1])
+  //       : true;
+  //     const matchesAmountRange = filters.amountRange
+  //       ? expense.amount >= parseFloat(filters.amountRange.split(" - ")[0]) &&
+  //         expense.amount <= parseFloat(filters.amountRange.split(" - ")[1])
+  //       : true;
+
+  //     return matchesCategory && matchesDateRange && matchesAmountRange;
+  //   });
+  // }, [filters, expenses]);
   return (
     <ul className="space-y-2">
       {expenses.map((expense) => {
