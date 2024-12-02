@@ -3,8 +3,23 @@ import { AlertCircle } from "lucide-react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/shared/ui/alert";
 // import { getAIAdvice } from '../utils/azureAI';
+type Expense = {
+  id: string;
+  user_id: string;
+  amount: number;
+  description?: string;
+  category_id?: string;
+  date: string;
+  is_recurring: boolean;
+  created_at: string;
+};
 
-const SpendingAdvice = ({ expenses, totalExpenses }) => {
+interface SpendingAdviceProps {
+  expenses: Expense[];
+  totalExpenses: number;
+}
+
+const SpendingAdvice: React.FC<SpendingAdviceProps> = ({ expenses, totalExpenses }) => {
   const [advice, setAdvice] = useState("");
 
   useEffect(() => {
