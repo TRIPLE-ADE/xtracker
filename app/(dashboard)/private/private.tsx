@@ -8,7 +8,7 @@ import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
 import BillReminders from "../components/BillReminders";
 import ExpenseChart from "../components/ExpenseCharts";
-import SavingsGoal from "../components/SavingsGoal";
+import SavingsGoal from "../components/SavingsGoals";
 import CategoryBreakdown from "../components/CategoryBreakdown";
 import FinancialGoals from "../components/FinancialGoals";
 
