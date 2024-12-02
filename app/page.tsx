@@ -1,5 +1,5 @@
 import Footer from "@/layout/Footer";
-import { AboutSection, FeaturesSection, HeroSection, InfoSection } from "@features/website";
+import { AboutSection, FeaturesSection, HeroSection, InfoSection } from "@/app/website/components";
 import Navbar from "@/layout/Header";
 
 const Home = () => {

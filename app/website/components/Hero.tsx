@@ -7,7 +7,7 @@ const HeroSection = () => (
     className="text-center my-16 min-h-[90dvh] flex flex-col justify-center items-center bg-cover bg-center relative px-4"
     style={{ backgroundImage: `url('/assets/images/hero.webp')` }}
   >
-    <div className="absolute inset-0 bg-black opacity-30" />
+    <div className="absolute inset-0 bg-black opacity-60" />
     <div className="relative z-10">
       <h1 className="text-7xl font-bold mb-4 text-white font-mono drop-shadow-lg">Xtracker</h1>
       <p className="text-xl mb-8 text-white drop-shadow-lg">
