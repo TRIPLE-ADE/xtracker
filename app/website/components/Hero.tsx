@@ -1,26 +1,44 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 import { Button } from "@/shared/ui/button";
 
-const HeroSection = () => (
-  <section
-    className="text-center my-16 min-h-[90dvh] flex flex-col justify-center items-center bg-cover bg-center relative px-4"
-    style={{ backgroundImage: `url('/assets/images/hero.webp')` }}
-  >
-    <div className="absolute inset-0 bg-black opacity-60" />
-    <div className="relative z-10">
-      <h1 className="text-7xl font-bold mb-4 text-white font-mono drop-shadow-lg">Xtracker</h1>
-      <p className="text-xl mb-8 text-white drop-shadow-lg">
-        Your AI-Powered Personal Finance Assistant
-      </p>
-      <Button
-        className="bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300"
-        size="lg"
-      >
-        Get Started <ArrowRight aria-hidden className="ml-2" />
-      </Button>
-    </div>
-  </section>
-);
+const HeroSection = () => {
+  return (
+    <section className="text-center mt-40 mb-8 flex flex-col justify-center items-center px-4">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-6xl font-bold mb-4 drop-shadow-lg text-secondary">
+          Track Your Expenses <span className="text-primary">Like a Pro</span>
+        </h1>
+        <p className="text-xl mb-8">
+          Say goodbye to financial stress! XTracker helps you track every penny, from everyday
+          expenses to recurring bills, all in one place. Stay on top of your spending effortlessly
+          with automated categorization and smart insights.
+        </p>
+        <Button
+          asChild
+          Icon={ArrowRight}
+          className="mt-2 w-full max-w-sm"
+          iconPlacement="right"
+          size="lg"
+          variant="expandIcon"
+        >
+          <Link href="/auth/signup">Get Started</Link>
+        </Button>
+      </div>
+      <Image
+        alt="Illustration of Xtacker application dashboard"
+        className="mt-12"
+        height={600}
+        loading="lazy"
+        src="/assets/images/demo.png"
+        width={800}
+      />
+    </section>
+  );
+};
 
 export default HeroSection;

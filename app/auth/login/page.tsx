@@ -38,7 +38,7 @@ export default function LoginPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 px-5">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-3xl font-bold text-indigo-600 text-center mb-6">Welcome to Xtracker</h2>
+        <h2 className="text-3xl font-bold text-primary text-center mb-6">Welcome to Xtracker</h2>
         <form action={formAction} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700" htmlFor="email">
@@ -80,7 +80,7 @@ export default function LoginPage() {
 
           <div className="text-center text-gray-500 mt-4">
             <span>Don&apos;t have an account? </span>
-            <Link className="text-indigo-600 hover:underline" href="/auth/signup">
+            <Link className="text-primary hover:underline" href="/auth/signup">
               Sign up
             </Link>
           </div>

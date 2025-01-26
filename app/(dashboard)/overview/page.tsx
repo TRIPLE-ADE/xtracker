@@ -70,7 +70,7 @@ const Page = () => {
         ].map((action, index) => (
           <Button
             key={index}
-            className="bg-indigo-600 text-white h-24 flex flex-col items-center justify-center gap-2 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+            className="bg-primary text-white h-24 flex flex-col items-center justify-center gap-2 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
             variant="ghost"
             onClick={action.action}
           >
@@ -84,7 +84,7 @@ const Page = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         {/* Expense Chart */}
         <Card className="bg-gray-100 p-6 rounded-xl shadow relative">
-          <h3 className="text-xl font-semibold mb-4 text-indigo-600">Spending Distribution</h3>
+          <h3 className="text-xl font-semibold mb-4 text-primary">Spending Distribution</h3>
           <ExpenseChart />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
             <p className="text-2xl font-bold">${totalExpenses.toLocaleString()}</p>
@@ -101,7 +101,7 @@ const Page = () => {
 
         {/* Spending Trends Chart */}
         <Card className="bg-gray-100 p-6 rounded-xl shadow relative">
-          <h3 className="text-xl font-semibold mb-4 text-indigo-600">Spending Trends</h3>
+          <h3 className="text-xl font-semibold mb-4 text-primary">Spending Trends</h3>
           <ExpenseTrends />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
             <p className="text-2xl font-bold">${totalExpenses.toLocaleString()}</p>
@@ -111,7 +111,7 @@ const Page = () => {
 
       {/* Recent Activity */}
       <Card className="bg-gray-100 p-6 rounded-xl shadow">
-        <h3 className="text-xl font-semibold mb-4 text-indigo-600">Recent Activity</h3>
+        <h3 className="text-xl font-semibold mb-4 text-primary">Recent Activity</h3>
         <div className="flex gap-4 mb-4">
           <Select>
             <SelectTrigger className="border rounded p-2">

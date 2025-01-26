@@ -95,7 +95,7 @@ const Onboarding = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-xl p-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-indigo-600">Welcome to Xtracker</h2>
+          <h2 className="text-3xl font-bold text-primary">Welcome to Xtracker</h2>
           <p className="mt-2 text-gray-600">Let&apos;s personalize your experience</p>
         </div>
         <form action={formAction} className="space-y-6">
@@ -107,7 +107,7 @@ const Onboarding = () => {
                   First Name
                 </label>
                 <input
-                  className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
+                  className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-primary focus:border-primary border-gray-300"
                   defaultValue={fieldErrors.first_name}
                   id="first_name"
                   name="first_name"

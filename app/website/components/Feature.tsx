@@ -23,11 +23,11 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section className="container mx-auto px-4 py-16 scroll-m-10" id="features">
+    <section className="container mx-auto px-4 py-8 scroll-m-10" id="features">
       {/* Heading */}
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-indigo-600 mb-4  font-mono">Key Features</h2>
-        <p className="text-gray-600 text-lg">
+        <h2 className="text-4xl font-bold text-primary mb-4  font-mono">Key Features</h2>
+        <p className="text-neutral-950 text-lg">
           Discover how XTracker cPan help you manage your finances smarter and easier.
         </p>
       </div>
@@ -55,9 +55,9 @@ interface FeatureCardProps {
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description }) => (
   <div className="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-xl transition-shadow duration-300">
-    <Icon aria-hidden className="w-12 h-12 mb-4 text-indigo-500" />
-    <h3 className="text-xl font-semibold mb-2 text-indigo-600 font-mono tracking-tight">{title}</h3>
-    <p className="text-gray-600">{description}</p>
+    <Icon aria-hidden className="w-12 h-12 mb-4 text-primary" />
+    <h3 className="text-xl font-semibold mb-2 text-primary font-mono tracking-tight">{title}</h3>
+    <p className="text-neutral-950">{description}</p>
   </div>
 );
 
