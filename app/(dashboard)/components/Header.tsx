@@ -12,7 +12,7 @@ import {
 
 const Header = () => {
   return (
-    <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="border-b bg-white   backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex justify-between h-16 items-center px-4 gap-4">
         {/* Left Section: Title */}
         {/* <div className="flex flex-1 text-indigo-600">
@@ -20,7 +20,7 @@ const Header = () => {
         </div> */}
         <div>
           <p className="text-gray-400">Welcome!</p>
-          <h2 className="text-xl font-bold text-indigo-600">John Doe</h2>
+          <h2 className="text-xl font-bold text-primary">John Doe</h2>
         </div>
 
         {/* Right Section: Notifications and Profile */}
@@ -53,7 +53,9 @@ const Header = () => {
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <a href="/logout">Logout</a>
+                <form action="/auth/signout" method="post">
+                  <button type="submit">Logout</button>
+                </form>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

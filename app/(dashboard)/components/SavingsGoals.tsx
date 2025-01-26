@@ -46,7 +46,7 @@ const SavingsGoals: React.FC = () => {
   // };
 
   return (
-    <Card className="bg-gradient-to-r from-indigo-600 to-purple-700 p-6 rounded-2xl shadow-lg">
+    <Card className="bg-gradient-to-r from-primary to-purple-800 p-6 rounded-2xl shadow-lg">
       <div className="grid md:grid-cols-4">
         <h2 className="text-xl font-semibold mb-4 text-white col-span-3">Savings Goals</h2>
         {goals.length > 1 && (
@@ -117,7 +117,7 @@ const SavingsGoals: React.FC = () => {
       ) : (
         <div className="flex flex-col items-center">
           <p className="text-white mb-4">No savings goals have been set!</p>
-          <Button className="bg-indigo-500 text-white" variant="ghost">
+          <Button className="bg-primary text-white" variant="ghost">
             Add Goal
           </Button>
         </div>

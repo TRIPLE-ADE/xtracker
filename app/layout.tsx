@@ -1,8 +1,8 @@
+import "./globals.css";
 import type { Metadata } from "next";
 
 import localFont from "next/font/local";
 
-import "./globals.css";
 import { Toaster } from "@/shared/ui/toaster";
 
 const geistSans = localFont({
@@ -17,17 +17,18 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Xtracker - AI-Powered Personal Finance Assistant",
+  title: "Xtracker - Track your expenses like a pro",
+  keywords: ["expense tracking", "budget management", "financial goals", "AI-powered insights"],
   description:
     "Take control of your finances with Xtracker. AI-powered insights to help you manage your budget, track expenses, and set financial goals.",
   openGraph: {
-    title: "Xtracker - AI-Powered Personal Finance Assistant",
+    title: "Xtracker - Track your expenses like a pro",
     description: "Take control of your finances with Xtracker.",
     url: "https://your-website.com",
     siteName: "Xtracker",
     images: [
       {
-        url: "https://your-website.com/image.jpg",
+        url: "/opengraph-image.png",
         width: 800,
         height: 600,
         alt: "Xtracker Landing Page",
@@ -38,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Xtracker - AI-Powered Personal Finance Assistant",
+    title: "Xtracker - Track your expenses like a pro",
     description: "Take control of your finances with Xtracker.",
-    images: ["https://your-website.com/image.jpg"],
+    images: ["/twitter-image.png"],
   },
 };
 

@@ -88,7 +88,7 @@ const BudgetOverview: React.FC = () => {
   const isOverBudget = progress > 100;
 
   return (
-    <Card className="bg-gradient-to-r from-indigo-600 to-purple-700 p-6 rounded-2xl shadow-lg">
+    <Card className="bg-gradient-to-r from-primary to-purple-800 p-6 rounded-2xl shadow-lg">
       {/* Budget Selector */}
       <div className="grid md:grid-cols-4">
         <h2 className="text-xl font-semibold mb-4 text-white col-span-3">Budget Overview</h2>
@@ -144,7 +144,7 @@ const BudgetOverview: React.FC = () => {
             Total Expenses: ${totalExpenses.toFixed(2)}
           </p>
           <p className="text-white mb-4">No budget has been set yet!</p>
-          <Button className="bg-indigo-500 text-white" variant="ghost" onClick={onBudgetOpen}>
+          <Button className="bg-primary text-white" variant="ghost" onClick={onBudgetOpen}>
             Add Budget
           </Button>
         </div>

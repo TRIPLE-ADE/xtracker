@@ -13,7 +13,7 @@ const BottomNav = () => {
       ].map((item, index) => (
         <Link
           key={index}
-          className="flex flex-col items-center text-gray-700 hover:text-indigo-600"
+          className="flex flex-col items-center text-gray-700 hover:text-primary"
           href={item.href}
         >
           {item.icon}
