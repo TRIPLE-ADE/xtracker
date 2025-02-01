@@ -37,12 +37,7 @@ export async function updateSession(request: NextRequest) {
     request.nextUrl.pathname !== "";
 
   if (!user && redirectRules) {
-    //   // no user, potentially respond by redirecting the user to the login page
-    const url = request.nextUrl.clone();
-
-    url.pathname = "/auth/login";
-
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
   if (user && redirectRules && !request.nextUrl.pathname.startsWith("/onboarding")) {

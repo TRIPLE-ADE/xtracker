@@ -29,14 +29,15 @@ const aboutCards = [
 
 const AboutSection = () => (
   <section className="py-8 scroll-m-10" id="about">
-    <div className="container mx-auto px-4 text-center">
+    <div className="max-w-6xl mx-auto px-4 text-center">
       {/* Heading */}
-      <h2 className="text-4xl font-bold mb-4 text-primary font-mono">About XTracker</h2>
+      <h2 className="text-4xl font-bold mb-4 text-primary font-mono">About XTracker & Founders</h2>
       <p className="text-xl mb-8 text-neutral-950 max-w-2xl mx-auto">
         XTracker was built to help individuals regain control over their financial lives. We believe
         that financial management should be simple, intuitive, and tailored to fit every unique
-        situation. XTracker empowers you to understand your spending, track your goals, and make
-        informed decisions to secure your financial future.
+        situation. Our dedicated team of founders is passionate about empowering users to understand
+        their spending, track their goals, and make informed decisions for a secure financial
+        future.
       </p>
 
       <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
@@ -64,8 +65,8 @@ const AboutSection = () => (
       <div className="mt-8">
         <p className="text-lg mb-6 text-neutral-950 max-w-2xl mx-auto">
           From daily expense tracking to long-term financial planning, XTracker is your partner in
-          financial clarity. We are committed to helping users achieve financial wellness, whether
-          they&apos;re managing everyday expenses or working towards life-changing goals.
+          financial clarity. Our founders are driven by the belief that everyone deserves a tool
+          that makes managing money effortless and secure.
         </p>
       </div>
     </div>

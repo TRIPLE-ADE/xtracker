@@ -2,15 +2,14 @@
 
 import React, { useState } from "react";
 import { format } from "date-fns";
+import { toast } from "sonner";
 
 import { Button, Input, Calendar } from "@/shared/ui";
 import { Modal } from "@/shared/custom/Modal";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/shared/ui/select";
 import useExpenseStore, { mockUserId } from "@/store/expenseStore";
-import { useToast } from "@/hooks/use-toast";
 import useDisclosure from "@/hooks/useDisclosure";
-
 interface AddBudgetModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -18,7 +17,6 @@ interface AddBudgetModalProps {
 
 const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ isOpen, onClose }) => {
   const { addBudget, categories } = useExpenseStore();
-  const { toast } = useToast();
   const { isOpen: isPopoverOpen, onClose: onPopoverClose, onOpen: onPopoverOpen } = useDisclosure();
   const {
     isOpen: isEndPopoverOpen,
@@ -35,21 +33,13 @@ const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ isOpen, onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (startDate && endDate && startDate > endDate) {
-      toast({
-        variant: "destructive",
-        title: "Notification",
-        description: "Start Date cannot be later than End Date.",
-      });
+      toast.warning("Start Date cannot be later than End Date.");
 
       return;
     }
 
     if (!name || !amount || !startDate || !endDate) {
-      toast({
-        variant: "destructive",
-        title: "Notification",
-        description: "Please fill all required filled",
-      });
+      toast.warning("Please fill all required filled");
 
       return;
     }
@@ -64,11 +54,7 @@ const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ isOpen, onClose }) => {
     };
 
     addBudget(newBudget);
-    toast({
-      variant: "success",
-      title: "Notification",
-      description: "Budget Successfully Added",
-    });
+    toast.success("Budget Successfully Added");
     onClose();
 
     //clear all input
