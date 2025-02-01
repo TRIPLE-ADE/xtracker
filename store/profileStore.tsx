@@ -2,11 +2,16 @@ import { create } from "zustand";
 
 import { ProfileStore } from "@/types";
 
-export const useProfileStore = create<ProfileStore>((set) => ({
+const initialState = {
+  user: null,
   profile: null,
   onboarding: null,
-  user: null,
+};
 
+export const useProfileStore = create<ProfileStore>((set) => ({
+  ...initialState,
+
+  setUser: (user) => set({ user }),
   // Set full profile data
   setProfile: (profile) => set({ profile }),
 
@@ -24,7 +29,4 @@ export const useProfileStore = create<ProfileStore>((set) => ({
     set((state) => ({
       onboarding: state.onboarding ? { ...state.onboarding, ...partialOnboarding } : null,
     })),
-
-  // Set user session data
-  setUser: (user) => set({ user }),
 }));
