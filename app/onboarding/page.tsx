@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
+import { toast } from "sonner";
 
 import { Button } from "@/shared/ui/button";
-import { useToast } from "@/hooks/use-toast";
 import { onboardingSchema } from "@/schemas/onboardingSchema";
 import SubmitButton from "@/shared/submitButton";
 
@@ -19,7 +19,6 @@ const initialState = {
 
 const Onboarding = () => {
   const router = useRouter();
-  const { toast } = useToast();
   const [step, setStep] = useState(1);
   const [state, formAction] = useFormState(saveProfileInfo, initialState);
 
@@ -63,11 +62,8 @@ const Onboarding = () => {
       saveFormData();
       setStep((prev) => prev + 1);
     } else {
-      toast({
-        variant: "destructive",
-        title: "Validation Error",
-        description: "Please correct the highlighted fields before proceeding.",
-      });
+      toast.warning("Please fill in the required fields");
+      // Please correct the highlighted fields before proceeding.
     }
   };
 
@@ -78,11 +74,7 @@ const Onboarding = () => {
 
   useEffect(() => {
     if (typeof state.message === "string" && state.message) {
-      toast({
-        variant: state.success ? "success" : "destructive",
-        title: "Notification",
-        description: state.message,
-      });
+      toast[state.success ? "success" : "error"](state.message);
     }
 
     if (state.success && state.redirectPath) {

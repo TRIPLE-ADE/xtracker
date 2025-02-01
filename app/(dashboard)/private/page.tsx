@@ -128,11 +128,15 @@ import React, { useState, useEffect } from "react";
 
 import { Button } from "@/shared/ui/button"; // Example of button import
 import SubmitButton from "@/shared/submitButton";
+import { useProfileStore } from "@/store/profileStore";
 
 const Dashboard: React.FC = () => {
   const [totalExpenses, setTotalExpenses] = useState<number>(0);
   const [budget, setBudget] = useState<number>(0);
   const [savingsGoal, setSavingsGoal] = useState<number>(0);
+  const { profile, onboarding, setProfile, setOnboarding } = useProfileStore();
+
+  console.log(profile, onboarding);
 
   useEffect(() => {
     // Fetch data from your database or API

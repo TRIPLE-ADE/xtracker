@@ -1,24 +1,25 @@
-import dynamic from "next/dynamic";
-
-import Footer from "@/layout/Footer";
-import { AboutSection, FeaturesSection, HeroSection, InfoSection } from "@/app/website/components";
-import Navbar from "@/layout/Header";
-
-const Particles = dynamic(() => import("@/shared/custom/particles"));
+import {
+  Header,
+  Footer,
+  FeaturesSection,
+  HeroSection,
+  FAQ,
+  HowItWorks,
+  Security,
+} from "@/app/components/website";
 
 const Home = () => {
   return (
     <div className="text-neutral-950">
-      {/* <div className="bg-gradient-to-br from-slate-200 via-slate-50 to-gray-200 text-gray-800"> */}
-      <Navbar />
+      <Header />
       <main>
         <HeroSection />
-        <AboutSection />
         <FeaturesSection />
-        <InfoSection />
+        <HowItWorks />
+        <Security />
+        <FAQ />
       </main>
       <Footer />
-      <Particles refresh color={"#000"} ease={80} quantityDesktop={350} quantityMobile={100} />
     </div>
   );
 };

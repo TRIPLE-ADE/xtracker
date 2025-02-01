@@ -15,9 +15,6 @@ const Header = () => {
     <header className="border-b bg-white   backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex justify-between h-16 items-center px-4 gap-4">
         {/* Left Section: Title */}
-        {/* <div className="flex flex-1 text-indigo-600">
-          <h2 className="text-lg font-semibold">Penny Pinscher</h2>
-        </div> */}
         <div>
           <p className="text-gray-400">Welcome!</p>
           <h2 className="text-xl font-bold text-primary">John Doe</h2>

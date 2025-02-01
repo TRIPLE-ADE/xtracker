@@ -7,7 +7,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "@/shared/ui";
 
-const Navbar = () => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -34,7 +34,15 @@ const Navbar = () => {
             <ul className="ml-10 flex items-baseline space-x-4">
               <li>
                 <a
-                  className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-base font-medium"
+                  href="#features"
+                >
+                  Features
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-base font-medium"
                   href="#about"
                 >
                   About
@@ -42,33 +50,25 @@ const Navbar = () => {
               </li>
               <li>
                 <a
-                  className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium"
-                  href="#features"
+                  className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-base font-medium"
+                  href="#why"
                 >
-                  Features
+                  Why
                 </a>
               </li>
               <li>
-                <Link
-                  className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium"
-                  href="/auth/login"
+                <a
+                  className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-base font-medium"
+                  href="#faq"
                 >
-                  Sign In
-                </Link>
-              </li>
-              <li>
-                <Button asChild>
-                  <Link href="/auth/signup">Sign Up</Link>
-                </Button>
-                {/* <Link
-                  className="px-3 py-2 rounded-md text-sm font-medium bg-primary text-white hover:bg-background hover:text-primary border border-primary"
-                  href="/auth/signup"
-                >
-                  Sign Up
-                </Link> */}
+                  FAQ
+                </a>
               </li>
             </ul>
           </div>
+          <Button asChild className="hidden md:flex" size="lg">
+            <Link href="/auth/signup">Sign Up</Link>
+          </Button>
           {/* Mobile Menu Toggle */}
           <div className="md:hidden">
             <Button
@@ -136,4 +136,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;

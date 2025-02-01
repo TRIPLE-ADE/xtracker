@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
+import { toast } from "sonner";
 
 import { Modal } from "@/shared/custom/Modal";
 import { Button } from "@/shared/ui/button";
@@ -8,7 +9,6 @@ import { Calendar } from "@/shared/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/shared/ui/select";
 import useExpenseStore, { mockUserId } from "@/store/expenseStore";
-import { useToast } from "@/hooks/use-toast";
 import useDisclosure from "@/hooks/useDisclosure";
 
 interface AddBudgetModalProps {
@@ -18,7 +18,6 @@ interface AddBudgetModalProps {
 
 const AddExpenseModal: React.FC<AddBudgetModalProps> = ({ isOpen, onClose }) => {
   const { addExpense, categories } = useExpenseStore();
-  const { toast } = useToast();
   const { isOpen: isPopoverOpen, onClose: onPopoverClose, onOpen: onPopoverOpen } = useDisclosure();
 
   const [amount, setAmount] = useState<number | "">("");
@@ -36,11 +35,7 @@ const AddExpenseModal: React.FC<AddBudgetModalProps> = ({ isOpen, onClose }) => 
     const currentDate = date || new Date();
 
     if (!amount || !description || !categoryId) {
-      toast({
-        variant: "destructive",
-        title: "Notification",
-        description: "Please fill all required fields",
-      });
+      toast.warning("Please fill in all fields");
 
       return;
     }
@@ -54,11 +49,7 @@ const AddExpenseModal: React.FC<AddBudgetModalProps> = ({ isOpen, onClose }) => 
     };
 
     addExpense(newExpense);
-    toast({
-      variant: "success",
-      title: "Notification",
-      description: "Expense successfully added!",
-    });
+    toast.success("Expense added successfully");
     onClose();
     reset();
   };
