@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import useExpenseStore from "@/store/expenseStore";
+import useExpenseStore from "@/stores/expenseStore";
 
 const ExpenseTrends: React.FC = () => {
   const { expenses } = useExpenseStore();

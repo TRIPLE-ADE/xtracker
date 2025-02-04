@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/shared/ui/select";
-import useExpenseStore from "@/store/expenseStore";
+import useExpenseStore from "@/stores/expenseStore";
 
 const SavingsGoals: React.FC = () => {
   const { goals } = useExpenseStore();

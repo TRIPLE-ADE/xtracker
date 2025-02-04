@@ -1,6 +1,6 @@
 import React from "react";
 
-import useExpenseStore from "@/store/expenseStore";
+import useExpenseStore from "@/stores/expenseStore";
 
 interface ExpenseListProps {
   totalExpenses: number;
