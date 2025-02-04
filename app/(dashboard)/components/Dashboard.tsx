@@ -7,7 +7,7 @@ import { Card } from "@/shared/ui/card";
 import { Button } from "@/shared/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/shared/ui/select";
 import useDisclosure from "@/hooks/useDisclosure";
-import useExpenseStore from "@/store/expenseStore";
+import useExpenseStore from "@/stores/expenseStore";
 
 import ExpenseList from "../components/ExpenseList";
 import ExpenseChart from "../components/ExpenseCharts";

@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 
 import Dashboard from "../components/Dashboard";
 
+export const revalidate = 36000;
 export default async function Page() {
   const supabase = createClient();
 
@@ -11,11 +12,7 @@ export default async function Page() {
     data: { user },
     error,
   } = await supabase.auth.getUser();
-  const { data: allOnboardingData } = await supabase
-    .from("onboarding")
-    .select("*")
-    .eq("user_id", user?.id)
-    .single();
+  const { data: allOnboardingData } = await supabase.from("onboarding").select("*");
 
   if (error || !user) {
     redirect("/auth/login");

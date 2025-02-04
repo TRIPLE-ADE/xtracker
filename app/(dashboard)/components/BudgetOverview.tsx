@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import { Card, Button } from "@/shared/ui";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/shared/ui/select";
-import useExpenseStore from "@/store/expenseStore";
+import useExpenseStore from "@/stores/expenseStore";
 import useDisclosure from "@/hooks/useDisclosure";
 
 import AddBudgetModal from "./AddBudgetModal";

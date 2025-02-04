@@ -8,7 +8,7 @@ import { Input } from "@/shared/ui/input";
 import { Calendar } from "@/shared/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/shared/ui/select";
-import useExpenseStore, { mockUserId } from "@/store/expenseStore";
+import useExpenseStore, { mockUserId } from "@/stores/expenseStore";
 import useDisclosure from "@/hooks/useDisclosure";
 
 interface AddBudgetModalProps {
