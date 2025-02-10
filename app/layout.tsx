@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 import localFont from "next/font/local";
+import { Suspense } from "react";
 
 import { Toaster } from "@/shared/ui/sonner";
 
@@ -57,7 +58,9 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
         <Toaster richColors position="top-center" />
         {children}
-        <ToastHandler />
+        <Suspense fallback={null}>
+          <ToastHandler />
+        </Suspense>
       </body>
     </html>
   );
