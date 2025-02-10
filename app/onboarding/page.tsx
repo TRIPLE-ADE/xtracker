@@ -1,28 +1,22 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/shared/ui/button";
 import { onboardingSchema } from "@/schemas/onboardingSchema";
-import SubmitButton from "@/shared/submitButton";
+import { FormInput, SubmitButton } from "@/shared/custom";
+import { AuthFormState } from "@/types";
+import { useToastErrorMessage } from "@/hooks/useToastErrorMessage";
 
 import { saveProfileInfo } from "../auth/actions";
 
-const initialState = {
-  success: false,
-  message: "",
-  redirectPath: undefined,
-};
-
 const Onboarding = () => {
-  const router = useRouter();
   const [step, setStep] = useState(1);
-  const [state, formAction] = useFormState(saveProfileInfo, initialState);
+  const [state, formAction] = useActionState<AuthFormState, FormData>(saveProfileInfo, {});
 
-  const fieldErrors = typeof state.message !== "string" ? state.message : {};
+  useToastErrorMessage(state);
 
   useEffect(() => {
     // Load saved form data when component mounts or step changes
@@ -63,7 +57,6 @@ const Onboarding = () => {
       setStep((prev) => prev + 1);
     } else {
       toast.warning("Please fill in the required fields");
-      // Please correct the highlighted fields before proceeding.
     }
   };
 
@@ -71,17 +64,6 @@ const Onboarding = () => {
     saveFormData();
     setStep((prev) => Math.max(1, prev - 1));
   };
-
-  useEffect(() => {
-    if (typeof state.message === "string" && state.message) {
-      toast[state.success ? "success" : "error"](state.message);
-    }
-
-    if (state.success && state.redirectPath) {
-      router.push(state.redirectPath);
-      sessionStorage.removeItem("onboardingData");
-    }
-  }, [state.message, toast, state.success, router, state.redirectPath]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 py-12 px-4 sm:px-6 lg:px-8">
@@ -94,32 +76,26 @@ const Onboarding = () => {
           <div className={`space-y-6 ${step === 1 ? "block" : "hidden"}`}>
             <h3 className="text-xl font-semibold text-gray-800">Personal Information</h3>
             <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700" htmlFor="first_name">
-                  First Name
-                </label>
-                <input
-                  className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-primary focus:border-primary border-gray-300"
-                  defaultValue={fieldErrors.first_name}
-                  id="first_name"
-                  name="first_name"
-                  placeholder="Enter your first name"
-                />
-                {fieldErrors?.first_name && (
-                  <p className="text-red-600 text-sm mt-1">{fieldErrors.first_name.join(", ")}</p>
-                )}
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700" htmlFor="last_name">
-                  Last Name
-                </label>
-                <input
-                  className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
-                  id="last_name"
-                  name="last_name"
-                  placeholder="Enter your last name"
-                />
-              </div>
+              <FormInput
+                required
+                aria-describedby="first_name-error"
+                defaultValue={state?.inputs?.first_name}
+                error={state?.errors?.first_name?.join(", ")}
+                label="First Name"
+                name="first_name"
+                placeholder="Enter your first name"
+                type="text"
+              />
+              <FormInput
+                required
+                aria-describedby="last_name-error"
+                defaultValue={state?.inputs?.last_name}
+                error={state?.errors?.last_name?.join(", ")}
+                label="Last Name"
+                name="last_name"
+                placeholder="Enter your last name"
+                type="text"
+              />
               <Button className="w-full" type="button" onClick={handleNextStep}>
                 Next
               </Button>
@@ -133,7 +109,9 @@ const Onboarding = () => {
                   Financial Goal
                 </label>
                 <select
+                  aria-describedby="financial_goal-error"
                   className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
+                  defaultValue={state?.inputs?.financial_goal}
                   id="financial_goal"
                   name="financial_goal"
                 >
@@ -145,46 +123,42 @@ const Onboarding = () => {
                   <option value="INVEST">Start Investing</option>
                   <option value="BUDGET">Better Budgeting</option>
                 </select>
+                {state?.errors?.financial_goal && (
+                  <p className="text-sm text-red-600" id="financial_goal-error">
+                    {state?.errors?.financial_goal?.join(", ")}
+                  </p>
+                )}
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700" htmlFor="monthly_income">
-                  Monthly Income
-                </label>
-                <input
-                  className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
-                  id="monthly_income"
-                  name="monthly_income"
-                  placeholder="Enter your monthly income"
-                  type="number"
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-sm font-medium text-gray-700"
-                  htmlFor="monthly_expenses"
-                >
-                  Monthly Expenses
-                </label>
-                <input
-                  className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
-                  id="monthly_expenses"
-                  name="monthly_expenses"
-                  placeholder="Enter your monthly expenses"
-                  type="number"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700" htmlFor="debt_amount">
-                  Debt Amount (if any)
-                </label>
-                <input
-                  className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
-                  id="debt_amount"
-                  name="debt_amount"
-                  placeholder="Enter your total debt"
-                  type="number"
-                />
-              </div>
+              <FormInput
+                required
+                aria-describedby="monthly_income-error"
+                defaultValue={state?.inputs?.monthly_income}
+                error={state?.errors?.monthly_income?.join(", ")}
+                label="Monthly Income"
+                name="monthly_income"
+                placeholder="Enter your monthly income"
+                type="number"
+              />
+              <FormInput
+                required
+                aria-describedby="monthly_expenses-error"
+                defaultValue={state?.inputs?.monthly_expenses}
+                error={state?.errors?.monthly_expenses?.join(", ")}
+                label="Monthly Expenses"
+                name="monthly_expenses"
+                placeholder="Enter your monthly expenses"
+                type="number"
+              />
+              <FormInput
+                required
+                aria-describedby="debt_amount-error"
+                defaultValue={state?.inputs?.debt_amount}
+                error={state?.errors?.debt_amount?.join(", ")}
+                label="Debt Amount (if any)"
+                name="debt_amount"
+                placeholder="Enter your total debt"
+                type="number"
+              />
               <div>
                 <label
                   className="block text-sm font-medium text-gray-700"
@@ -193,7 +167,9 @@ const Onboarding = () => {
                   Preferred Currency
                 </label>
                 <select
+                  aria-describedby="preferred_currency-error"
                   className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
+                  defaultValue={state?.inputs?.preferred_currency}
                   id="preferred_currency"
                   name="preferred_currency"
                 >
@@ -203,6 +179,11 @@ const Onboarding = () => {
                   <option value="GBP">GBP (£)</option>
                   <option value="JPY">JPY (¥)</option>
                 </select>
+                {state?.errors?.preferred_currency && (
+                  <p className="text-sm text-red-600" id="preferred_currency-error">
+                    {state?.errors?.preferred_currency?.join(", ")}
+                  </p>
+                )}
               </div>
               <div className="flex space-x-4">
                 <Button className="w-1/2" type="button" variant="outline" onClick={handleBackStep}>

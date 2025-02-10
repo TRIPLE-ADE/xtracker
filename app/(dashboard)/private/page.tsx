@@ -127,7 +127,7 @@ const RecentTransactions: React.FC = () => {
 import React, { useState, useEffect } from "react";
 
 import { Button } from "@/shared/ui/button"; // Example of button import
-import SubmitButton from "@/shared/submitButton";
+import { SubmitButton } from "@/shared/custom";
 
 const Dashboard: React.FC = () => {
   const [totalExpenses, setTotalExpenses] = useState<number>(0);

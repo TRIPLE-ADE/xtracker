@@ -9,7 +9,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="hidden fixed h-svh md:flex md:w-56 bg-white p-6 flex-col shadow-lg text-gray-700">
+    <div className="hidden fixed h-svh md:flex md:w-56 bg-background p-6 flex-col shadow-lg">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <span className="text-3xl font-bold font-mono">XTracker</span>

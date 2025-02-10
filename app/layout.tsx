@@ -2,8 +2,11 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 import localFont from "next/font/local";
+import { Suspense } from "react";
 
 import { Toaster } from "@/shared/ui/sonner";
+
+import { ToastHandler } from "./components/ToastHandler";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -51,10 +54,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html suppressHydrationWarning lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
-        {children}
         <Toaster richColors position="top-center" />
+        {children}
+        <Suspense fallback={null}>
+          <ToastHandler />
+        </Suspense>
       </body>
     </html>
   );

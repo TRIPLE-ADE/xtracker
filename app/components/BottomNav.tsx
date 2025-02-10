@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const BottomNav = () => {
   return (
-    <div className="md:hidden fixed bottom-0 w-full bg-white p-4 flex justify-around items-center shadow-lg">
+    <div className="md:hidden fixed bottom-0 w-full bg-background p-4 flex justify-around items-center shadow-lg">
       {[
         { href: "/dashboard", icon: <Home />, label: "Home" },
         { href: "/expenses", icon: <PlusCircle />, label: "Add" },

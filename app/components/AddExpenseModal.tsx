@@ -1,8 +1,9 @@
+"use client";
 import React, { useState } from "react";
 import { format } from "date-fns";
 import { toast } from "sonner";
 
-import { Modal } from "@/shared/custom/Modal";
+import { Modal } from "@/shared/custom/custom-modal";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Calendar } from "@/shared/ui/calendar";

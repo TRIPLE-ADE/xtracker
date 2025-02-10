@@ -9,7 +9,7 @@ import {
   //   changePassword,
   //   deleteAccount,
 } from "@/app/(dashboard)/profile/action";
-import SubmitButton from "@/shared/submitButton";
+import { SubmitButton } from "@/shared/custom";
 
 interface ProfileProps {
   initialProfile: UserProfile;
@@ -36,7 +36,7 @@ export default function Profile({ initialProfile, initialOnboarding }: ProfilePr
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 bg-background">
       <h1 className="text-2xl font-bold">Profile Settings</h1>
       {/* Profile Information */}
       <Card className="p-6 space-y-4">
@@ -65,7 +65,7 @@ export default function Profile({ initialProfile, initialOnboarding }: ProfilePr
           {/* <Input disabled defaultValue={profile?.email} label="Email" name="email" type="email" /> */}
           {/* <Input required defaultValue={profile?.phone} label="Phone" name="phone" type="tel" /> */}
 
-          <SubmitButton text="Save Changes" />
+          <SubmitButton className="" text="Save Changes" />
         </form>
       </Card>
 

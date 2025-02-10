@@ -1,3 +1,5 @@
+import type { AuthUser } from "@supabase/supabase-js";
+
 // Onboarding type
 export type Onboarding = {
   onboarding_id: number;
@@ -18,23 +20,15 @@ export interface UserProfile {
   last_name: string;
 }
 
-//user session type
-export interface UserSession {
-  id: string;
-  email: string;
-  emailConfirmed: boolean;
-  lastSignInAt: string;
-  createdAt: string;
-  provider: string;
-}
-
+// Partial user data type
+type PartialUser = Partial<AuthUser>;
 export interface ProfileStore {
   profile: UserProfile | null;
   onboarding: Onboarding | null;
-  user: UserSession | null;
+  user: PartialUser | null;
   setProfile: (profile: UserProfile) => void;
   updateProfile: (partialProfile: Partial<UserProfile>) => void; // For partial updates
   setOnboarding: (onboarding: Onboarding) => void;
   updateOnboarding: (partialOnboarding: Partial<Onboarding>) => void; // For partial updates
-  setUser: (user: UserSession) => void;
+  setUser: (user: PartialUser) => void;
 }

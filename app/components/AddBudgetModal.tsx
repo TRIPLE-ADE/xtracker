@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { toast } from "sonner";
 
 import { Button, Input, Calendar } from "@/shared/ui";
-import { Modal } from "@/shared/custom/Modal";
+import { Modal } from "@/shared/custom/custom-modal";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/shared/ui/select";
 import useExpenseStore, { mockUserId } from "@/stores/expenseStore";

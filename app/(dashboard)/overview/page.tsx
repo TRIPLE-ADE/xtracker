@@ -2,11 +2,11 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
 
-import Dashboard from "../components/Dashboard";
+import Dashboard from "../../components/Dashboard";
 
 export const revalidate = 36000;
 export default async function Page() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },
