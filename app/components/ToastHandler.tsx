@@ -6,8 +6,8 @@ import { toast } from "sonner";
 
 export function ToastHandler() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const hasShown = useRef(false);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (hasShown.current) return;
