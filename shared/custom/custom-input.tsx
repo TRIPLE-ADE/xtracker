@@ -21,8 +21,13 @@ export function FormInput({ label, error, className, ...props }: FormInputProps)
           className,
         )}
         {...props}
+        id={props.id || props.name}
       />
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && (
+        <p className="text-sm text-red-600" id={props["aria-describedby"]}>
+          {error}
+        </p>
+      )}
     </div>
   );
 }

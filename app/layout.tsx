@@ -5,6 +5,8 @@ import localFont from "next/font/local";
 
 import { Toaster } from "@/shared/ui/sonner";
 
+import { ToastHandler } from "./components/ToastHandler";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -51,10 +53,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html suppressHydrationWarning lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
-        {children}
         <Toaster richColors position="top-center" />
+        {children}
+        <ToastHandler />
       </body>
     </html>
   );

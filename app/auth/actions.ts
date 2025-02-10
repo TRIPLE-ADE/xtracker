@@ -5,148 +5,127 @@ import { redirect } from "next/navigation";
 import { AuthError } from "@supabase/auth-js";
 
 import { createClient } from "@/utils/supabase/server";
-import { signUpSchema, loginSchema } from "@/schemas/authSchema";
-import { onboardingSchema } from "@/schemas/onboardingSchema";
+import { signUpSchema, loginSchema, onboardingSchema } from "@/schemas";
 import { handleError } from "@/utils/authErrorHandlers";
+import { AuthFormState } from "@/types";
 
-type PrevState = {
-  message: string | Partial<Record<string, string[]>>;
-  success?: boolean;
-  redirectPath?: string;
-};
+export async function login(_prevState: AuthFormState, formData: FormData) {
+  const supabase = await createClient();
 
-export async function login(prevState: PrevState, formData: FormData) {
-  const supabase = createClient();
-
-  const parseResult = loginSchema.safeParse({
+  const rawData = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
-  });
+  };
+
+  const parseResult = loginSchema.safeParse(rawData);
 
   if (!parseResult.success) {
     return {
-      ...prevState,
-      message: parseResult.error.flatten().fieldErrors,
-      redirectPath: undefined,
+      inputs: rawData,
+      errors: parseResult.error.flatten().fieldErrors,
     };
   }
 
   const data = parseResult.data;
+  let redirectPath = "/overview?login=success";
 
   try {
     const { data: loginData, error } = await supabase.auth.signInWithPassword(data);
 
     if (error) {
       return {
+        inputs: rawData,
         ...handleError(
           error as AuthError,
           "Login failed. Please check your credentials and try again.",
         ),
-        redirectPath: undefined,
       };
     }
 
-    if (loginData) {
+    if (loginData?.user) {
       const { data: profileData, error: profileError } = await supabase
         .from("onboarding")
         .select("onboarding_status")
-        .eq("user_id", loginData.user?.id)
+        .eq("user_id", loginData.user.id)
         .single();
 
-      if (profileError) {
-        return {
-          success: true,
-          message: "Login successful, but could not load profile data.",
-          redirectPath: undefined,
-        };
+      if (profileError || profileData?.onboarding_status !== "COMPLETED") {
+        redirectPath = "/onboarding?onboarding=error";
       }
-
-      revalidatePath("/");
-
-      const redirectPath =
-        profileData?.onboarding_status !== "COMPLETED" ? "/onboarding" : "/overview";
-
-      return { success: true, message: "Login successful", redirectPath };
     }
-
-    revalidatePath("/", "layout");
-
-    return { success: true, message: "Login successful. Welcome back!", redirectPath: "/overview" };
   } catch (error) {
-    return { success: false, message: `Unexpected error: ${error}`, redirectPath: undefined };
+    return { message: `Unexpected error: ${error}` };
   }
+  revalidatePath("/", "layout");
+  redirect(redirectPath);
 }
 
-export async function signup(prevState: PrevState, formData: FormData) {
-  const supabase = createClient();
-
-  const parseResult = signUpSchema.safeParse({
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
-    confirmPassword: formData.get("confirmPassword") as string,
-  });
-
-  if (!parseResult.success) {
-    return {
-      ...prevState,
-      message: parseResult.error.flatten().fieldErrors,
-    };
-  }
-
-  const data = parseResult.data;
+export async function signup(_prevState: AuthFormState, formData: FormData) {
+  const supabase = await createClient();
 
   try {
-    const { data: success, error } = await supabase.auth.signUp({
+    const rawData = {
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+      confirmPassword: formData.get("confirmPassword") as string,
+    };
+
+    const parseResult = signUpSchema.safeParse(rawData);
+
+    if (!parseResult.success) {
+      return {
+        inputs: rawData,
+        errors: parseResult.error.flatten().fieldErrors,
+      };
+    }
+
+    const data = parseResult.data;
+
+    const { error } = await supabase.auth.signUp({
       email: data.email,
       password: data.password,
     });
 
     if (error) {
-      return handleError(error as AuthError, "Signup failed. Please try again later.");
-    }
-
-    if (success) {
       return {
-        success: true,
-        message: "Signup successful. Please check your email to verify your account.",
+        inputs: rawData,
+        ...handleError(error as AuthError, "Signup failed. Please try again later."),
       };
     }
-
-    revalidatePath("/", "layout");
-    redirect("/login");
   } catch (error) {
     return {
-      success: false,
       message: `${error} An unexpected error occurred. Please try again later.`,
     };
   }
+  revalidatePath("/", "layout");
+  redirect("/login?signup=success");
 }
 
-export async function saveProfileInfo(prevState: PrevState, formData: FormData) {
-  const supabase = createClient();
-
-  // Parse and validate form data
-  const parseResult = onboardingSchema.safeParse({
-    first_name: formData.get("first_name") as string,
-    last_name: formData.get("last_name") as string,
-    financial_goal: formData.get("financial_goal") as string,
-    monthly_income: Number(formData.get("monthly_income")),
-    monthly_expenses: Number(formData.get("monthly_expenses")),
-    debt_amount: Number(formData.get("debt_amount")),
-    preferred_currency: formData.get("preferred_currency") as string,
-  });
-
-  if (!parseResult.success) {
-    return {
-      ...prevState,
-      message: parseResult.error.flatten().fieldErrors,
-      redirectPath: undefined,
-    };
-  }
-
-  const data = parseResult.data;
+export async function saveProfileInfo(_prevState: AuthFormState, formData: FormData) {
+  const supabase = await createClient();
 
   try {
+    const rawData = {
+      first_name: formData.get("first_name") as string,
+      last_name: formData.get("last_name") as string,
+      financial_goal: formData.get("financial_goal") as string,
+      monthly_income: Number(formData.get("monthly_income")),
+      monthly_expenses: Number(formData.get("monthly_expenses")),
+      debt_amount: Number(formData.get("debt_amount")),
+      preferred_currency: formData.get("preferred_currency") as string,
+    };
+    // Parse and validate form data
+    const parseResult = onboardingSchema.safeParse(rawData);
+
+    if (!parseResult.success) {
+      return {
+        inputs: rawData,
+        errors: parseResult.error.flatten().fieldErrors,
+      };
+    }
+
+    const data = parseResult.data;
+
     // Get user information from Supabase auth
     const {
       data: { user },
@@ -154,7 +133,6 @@ export async function saveProfileInfo(prevState: PrevState, formData: FormData) 
 
     if (!user) {
       return {
-        success: false,
         message: "User not authenticated",
       };
     }
@@ -171,7 +149,7 @@ export async function saveProfileInfo(prevState: PrevState, formData: FormData) 
 
     if (profileError) {
       return {
-        success: false,
+        input: rawData,
         message: "Failed to save profile information",
       };
     }
@@ -192,23 +170,16 @@ export async function saveProfileInfo(prevState: PrevState, formData: FormData) 
 
     if (onboardingError) {
       return {
-        success: false,
+        input: rawData,
         message: "Failed to save onboarding information",
       };
     }
-
-    // Revalidate path after updating both tables
-    revalidatePath("/");
-
-    return {
-      success: true,
-      message: "Profile and onboarding information saved successfully",
-      redirectPath: "/overview",
-    };
   } catch (error) {
     return {
-      success: false,
       message: `${error} An unexpected error occurred. Please try again later.`,
     };
   }
+  // Revalidate path after updating both tables
+  revalidatePath("/");
+  redirect("/overview?onboarding=success");
 }

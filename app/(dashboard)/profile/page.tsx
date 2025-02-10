@@ -3,10 +3,10 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
 
-import Profile from "../components/ProfileForm";
+import Profile from "../../components/ProfileForm";
 
 const Page = async () => {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // Fetch authenticated user
   // 🔐 Get authenticated user

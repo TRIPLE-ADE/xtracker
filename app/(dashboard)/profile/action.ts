@@ -36,7 +36,7 @@ const ProfileSchema = z.object({
 
 // Server action for updating profile
 export async function updateProfile(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const data = Object.fromEntries(formData.entries());
 
   // Validate data with Zod
@@ -73,7 +73,7 @@ export async function updateProfile(formData: FormData) {
 
 // Server action for updating preferences
 export async function updatePreferences(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const data = Object.fromEntries(formData.entries());
   const {
     data: { user },
